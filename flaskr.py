@@ -22,7 +22,7 @@ def init_db():
         with app.open_resource('schema.sql', mode='r') as f:
             db.cursor().ececutescript(f.read())
         db.commit()
-
+'''
 @app.before_request
 def before_request():
     g.db = connect_db()
@@ -68,6 +68,6 @@ def logout():
     session.pop('logged_in', None)
     flash('You were logged out')
     return redirect(url_for('show_entries'))
-
+'''
 if __name__ == '__main__':
     app.run()
