@@ -4,7 +4,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
 
 from contextlib import closing
 
-DATABASE = '/tmp/flaskr.db'
+DATABASE = r'tmp\flaskr.db'
 DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
@@ -20,9 +20,9 @@ def connect_db():
 def init_db():
     with closing(connect_db()) as db:
         with app.open_resource('schema.sql', mode='r') as f:
-            db.cursor().ececutescript(f.read())
+            db.cursor().executescript(f.read())
         db.commit()
-'''
+
 @app.before_request
 def before_request():
     g.db = connect_db()
@@ -68,6 +68,6 @@ def logout():
     session.pop('logged_in', None)
     flash('You were logged out')
     return redirect(url_for('show_entries'))
-'''
+
 if __name__ == '__main__':
     app.run()
